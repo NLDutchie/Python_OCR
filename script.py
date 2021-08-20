@@ -5,6 +5,11 @@ import tempfile
 from PIL import Image
 from docx import Document
 
+#TODO: Error handling for creating images
+#TODO: Tesseract image too large
+#TODO: Find a way to add text to word document instead of txt file
+#TODO: Preprocessing : https://www.freecodecamp.org/news/getting-started-with-tesseract-part-ii-f7f9a0899b3f/
+
 # Create a temp folder to save temp images in
 with tempfile.TemporaryDirectory() as temp_dir:
   pdfFiles = Path.cwd().glob('*.pdf')
@@ -50,3 +55,4 @@ with tempfile.TemporaryDirectory() as temp_dir:
     document = Document()
     document.add_paragraph(' ')
     document.save(f'{saveDir}/{stemName}.docx')
+    
