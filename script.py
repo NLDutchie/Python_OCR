@@ -3,6 +3,7 @@ from pdf2image import convert_from_path
 from pathlib import Path
 import tempfile
 from PIL import Image
+from docx import Document
 
 # Create a temp folder to save temp images in
 with tempfile.TemporaryDirectory() as temp_dir:
@@ -14,7 +15,7 @@ with tempfile.TemporaryDirectory() as temp_dir:
     Path(saveDir).mkdir(parents=True, exist_ok=True)
 
     # Convert PDF contents to pages
-    pages = convert_from_path(fileName, 500,poppler_path=r"C:\poppler-21.03.0\Library\bin",output_folder=temp_dir)
+    pages = convert_from_path(fileName, 500,poppler_path=r"D:\poppler-21.03.0\Library\bin",output_folder=temp_dir)
     
     # Create an array of temp images
     temp_images = []
@@ -45,4 +46,7 @@ with tempfile.TemporaryDirectory() as temp_dir:
     processed_image = pytesseract.image_to_string(savedImagePath)
     f= open(f'{saveDir}/{stemName}.txt',"w+")
     f.write(processed_image)
-    f.close() 
+    f.close()
+    document = Document()
+    document.add_paragraph(' ')
+    document.save(f'{saveDir}/{stemName}.docx')
