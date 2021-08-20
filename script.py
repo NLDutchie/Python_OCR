@@ -14,7 +14,7 @@ with tempfile.TemporaryDirectory() as temp_dir:
     Path(saveDir).mkdir(parents=True, exist_ok=True)
 
     # Convert PDF contents to pages
-    pages = convert_from_path(fileName, 500,poppler_path=r"D:\poppler-21.03.0\Library\bin",output_folder=temp_dir)
+    pages = convert_from_path(fileName, 500,poppler_path=r"C:\poppler-21.03.0\Library\bin",output_folder=temp_dir)
     
     # Create an array of temp images
     temp_images = []
@@ -42,5 +42,7 @@ with tempfile.TemporaryDirectory() as temp_dir:
     # save merged image
     savedImagePath = f'{saveDir}/{stemName}.jpg'
     merged_image.save(savedImagePath, 'JPEG')
-    
-    print(pytesseract.image_to_string(savedImagePath))
+    processed_image = pytesseract.image_to_string(savedImagePath)
+    f= open(f'{saveDir}/{stemName}.txt',"w+")
+    f.write(processed_image)
+    f.close() 
